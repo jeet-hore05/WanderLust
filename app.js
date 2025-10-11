@@ -81,7 +81,7 @@ app.post("/listings",validateListing,wrapAsync( async(req,res,next)=>{
     //     throw new ExpressError(404,"send valid data for listing");
     // }
 
-    const newListing=new Listing(listing);
+    const newListing=new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
 })
