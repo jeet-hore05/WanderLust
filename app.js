@@ -11,8 +11,9 @@ const passport=require("passport");
 const LocalStrategy = require("passport-local");
 const User=require("./models/user.js");
 
-const listings=require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingsRouter=require("./routes/listing.js");
+const reviewsRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 
 main().then(()=>{
     console.log("Connected to DB")
@@ -81,9 +82,10 @@ const validateReview=(req,res,next)=>{
     }
 }
 
-app.use("/listings",listings)
+app.use("/listings",listingsRouter)
 
-app.use("/listings/:id/reviews",reviews);
+app.use("/listings/:id/reviews",reviewsRouter);
+app.use("/",userRouter);
 
 
 //error handling middleware
