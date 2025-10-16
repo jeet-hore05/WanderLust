@@ -51,7 +51,7 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -60,7 +60,16 @@ app.use((req,res,next)=>{
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
     next();
-})
+});
+
+app.get("/demouser", async(req,res)=>{
+    let fakeuser = new User({
+        email : "student@gmail.com",
+        username : "delta-student"
+    });
+    let registerUser=await User.register(fakeuser, "helloworld");
+    res.send(registerUser);
+});
 
 const validateReview=(req,res,next)=>{
     let {error}=reviewSchema.validate(req.body);
