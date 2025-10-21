@@ -8,6 +8,8 @@
         <img src="<%= listing.image.url %>" class="card-img-top show-img"alt="Listing_Image">
         <div class="card-body">
             <p class="card-text">
+                Owned by - @<i><%= listing.owner.username %></i>
+                <br><br>
                 <%= listing.description %>
                 <br>
                 &#8377;<%= listing.price.toLocaleString("en-IN") %>
