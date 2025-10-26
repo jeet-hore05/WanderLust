@@ -8,10 +8,11 @@ module.exports.listingSchema = Joi.object({
         location:Joi.string().required(),
         country:Joi.string().required(),
         price:Joi.number().required().min(0),
-        image: Joi.object({
-            url: Joi.string().uri().required().label("Image URL"),
-            filename: Joi.string().allow("")
-        }).required(),
+        // image: Joi.object({
+        //     url: Joi.string().uri().required().label("Image URL"),
+        //     filename: Joi.string().allow("")
+        // }).required(),
+        image:Joi.string().allow("",null)
 
     }).required()
 });
