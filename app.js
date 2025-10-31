@@ -1,7 +1,6 @@
 if(process.env.NODE_ENV != "production"){
     require('dotenv').config();
 }
-console.log(process.env.SECRET);
 
 const express=require("express");
 const app=express();
@@ -20,15 +19,19 @@ const listingsRouter=require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
+const dbUrl=process.env.ATLASDB_URL;
+
+async function main(){
+    await mongoose.connect(dbUrl);
+}
+
 main().then(()=>{
     console.log("Connected to DB")
 }).catch(err=>{
     console.log(err);
+    console.error(err);
 })
 
-async function main(){
-    await mongoose.connect("mongodb://127.0.0.1:27017/WonderList")
-}
 
 app.set("view engine", "ejs");
 app.set("views",path.join(__dirname,"views"));
